@@ -5,6 +5,10 @@
     padding-bottom: 5%; 
 }
 
+.exhibitions .searchResults {
+    margin-bottom: 20px; 
+}
+
 .exhibitions h2 {
     text-align: center; 
     padding-top: 20px; 
