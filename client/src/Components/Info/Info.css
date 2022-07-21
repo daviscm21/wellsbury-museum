@@ -1,0 +1,91 @@
+.info {
+    padding-bottom: 16px;  
+    margin: 1% 1% 0; 
+    display: flex; 
+    justify-content: space-around; 
+    text-align: center; 
+}
+
+.info h3 {
+    Font-Family: 'Ovo', Serif;
+    Font-Size: 20px; 
+}
+
+.info p {
+    font-size: 15px; 
+    Font-Family: 'Quattrocento Sans', Sans-Serif;
+}
+
+.col {
+    flex: 1; 
+    width: 29%;
+    margin: 1%; 
+    background: #e9eb98; 
+    padding: 1%;
+    display: flex; 
+    flex-wrap: wrap;  
+    min-height: 70vh; 
+    align-content: space-around; 
+} 
+
+.info-box {
+
+    text-align: center;  
+    
+}
+
+.info-box img {
+
+    width: 100%; 
+}
+
+.pricing-and-opening { 
+
+    justify-content: space-around; 
+    align-content: space-around; 
+}
+
+.pricing-table {
+    background: white; 
+}
+
+table, td {
+    border: solid 1px black; 
+    text-align: left; 
+}
+
+@media only screen and (max-width: 800px) {
+  .info {
+      display: block; 
+  } 
+  
+  .col {
+      display: block; 
+      width: 75%; 
+      min-height: 0; 
+      justify-content: space-around;
+      margin-left: auto; 
+      margin-right: auto; 
+  }
+
+  .info-box img {
+      width: 65%; 
+  }
+
+  .pricing-table {
+      margin-left: auto; 
+      margin-right: auto; 
+  }
+    }
+
+    @media only screen and (max-width: 550px) {
+.col {
+    width: 100%; 
+}
+    }
+
+    @media only screen and (max-width: 350px) {
+        .info-box img {
+            width: 90%; 
+        }
+    }

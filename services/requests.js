@@ -1,26 +1,49 @@
-const fetch = require('node-fetch'); // import node-fetch (enables the fetch API to be used server-side)
 const { Pool } = require('pg'); // import node-postgres
+require('dotenv').config(); 
 
-const pool = new Pool({ // create connection to database
+if(process.env.DATABASE_URL)
+{var pool = new Pool({ // create connection to database
   connectionString: process.env.DATABASE_URL,	// use DATABASE_URL environment variable from Heroku app 
   ssl: {
     rejectUnauthorized: false // don't check for SSL cert
   }
+})
+}
+else {
+var pool = new Pool({
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DB_DATABASE,
+  password: process.env.DB_PASSWORD,
+  port: process.env.DB_PORT,
 });
+} 
 
-const findJobs = async (req, res) => {
-  const type = req.query.type;  
+const findExhibition = async (req, res) => {
+  const region = req.query.region;   
+  const period = req.query.period; 
+  const type = req.query.type; 
+  const exhibitiontype = req.query.exhibitiontype; 
 
-  const query = 'SELECT * FROM jobs WHERE type = $1'; 
+  const query1 = 'SELECT * FROM ' + exhibitiontype + ' WHERE region = $1 AND period = $2'; 
+  const query2 = 'SELECT * FROM ' + exhibitiontype + ' WHERE type = $1'; 
 
   try{
-
-      const jobs = await pool.query(query, [type]);  
+    if(region && period){
+      const exhibitions = await pool.query(query1, [region, period]);  
       res.status(201).send({
         status: 'Success',
-        data: jobs.rows[0],
+        data: exhibitions.rows[0],
         
       })
+    }
+    else if(type){
+      const exhibitions = await pool.query(query2, [type]);  
+      res.status(201).send({
+        status: 'Success',
+        data: exhibitions.rows[0],
+        })
+    }
 
 } catch(err) {
   return res.status(500).send({
@@ -29,45 +52,32 @@ const findJobs = async (req, res) => {
 }
 }
 
-const getReviews = async (req, res) => {
+let donationIdCounter = 1; 
 
-  const query = 'SELECT * FROM reviews ORDER BY id DESC LIMIT 3'; 
-
-  try{
-
-      const reviews = await pool.query(query);  
-      res.status(201).send(reviews.rows)
-
-} catch(err) {
-  return res.status(500).send({
-    error: err.message
-  });
-}
-}
-
-let reviewIdCounter = 4; 
-
-const postReview = async (req, res) => {
-    const {title, review, stars, firstname, surname} = req.body; 
-    const query = 'INSERT INTO reviews (id, title, review, stars, firstname, surname) VALUES ($1, $2, $3, $4, $5, $6)'; 
+const makeDonation = async (req, res) => {
+    const {firstname, surname, country, amount} = req.body; 
+    const query = 'INSERT INTO donations (id, firstname, surname, country, amount, time) VALUES ($1, $2, $3, $4, $5, $6)'; 
 
   try{
+    let id = donationIdCounter++;  
 
-    let id = reviewIdCounter++;  
+  // Gets today's date
+    var today = new Date();
+    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    var datetime = date+' '+time;
     
-    const newReview = await pool.query(query, [id, title, review, stars, firstname, surname]);
-
+    const newDonation = await pool.query(query, [id, firstname, surname, country, amount, datetime]);  
     res.status(201).send({
-      status: 'Success',
-      message: 'New review posted',
-      data: newReview.rows[0],
-      })
+			status: 'Success',
+			message: 'New donation made',
+			data: newDonation.rows[0],
+			})
   } catch(err) {
-
     return res.status(500).send({
-      error: err.message
-    });
+			error: err.message
+		});
   }
-}
+} 
 
-module.exports = { findJobs, getReviews, postReview }
+module.exports = { findExhibition, makeDonation }

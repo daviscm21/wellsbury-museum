@@ -1,0 +1,90 @@
+.exhibitions {
+    background-color: #e9eb98;
+    min-height: 60vh;
+    height: auto;  
+    padding-bottom: 5%; 
+}
+
+.exhibitions h2 {
+    text-align: center; 
+    padding-top: 20px; 
+    font-size: 30px; 
+    Font-Family: 'Ovo', Serif;
+    margin: 10px; 
+}
+
+.exhibitions p {
+    text-align: center;
+    font-size: 20px; 
+    Font-Family: 'Quattrocento Sans', Sans-Serif; 
+}
+
+.exhibitions label {
+    font-size: 20px; 
+    Font-Family: 'Ovo', Serif; 
+    display: block; 
+    text-align: center;
+}
+
+.exhibitions select {
+    width: 250px; 
+    margin: 10px 50%; 
+    position: relative; 
+    left: -125px; 
+}
+
+.exhibitions input {
+    margin: 1% 50% 0;
+    position: absolute; 
+    left: -50px; 
+    width: 100px; 
+    font-size: 20px; 
+    Font-Family: 'Ovo', Serif;
+    margin-top: 20px; 
+}
+
+.exhibitions .searchResults {
+    display: flex; 
+    margin-top: 70px; 
+    align-items: center; 
+    margin-left: 25%; 
+    margin-right: 25%; 
+    width: 50%;
+    justify-content: center;
+    background: rgb(252, 212, 138);  
+
+}
+
+.exhibitions img {
+    width: 40%; 
+    padding: 5% 0 5% 5%; 
+}
+
+.exhibitions h3 {
+    Font-Family: 'Ovo', Serif; 
+    font-size: 25px;  
+    text-align: center;   
+}
+
+.exhibitions .searchResults-text {
+    margin: 3%; 
+}
+
+@media only screen and (max-width: 890px) {
+.exhibitions .searchResults{
+width: 90%; 
+margin-left: 5%; 
+margin-right: 5%
+}
+
+}
+
+@media only screen and (max-width: 500px) {
+    .exhibitions .searchResults{
+      flex-wrap: wrap; 
+    }
+    .exhibitions img{
+        padding: 5% 0 0; 
+    }
+    
+}
