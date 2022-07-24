@@ -10,7 +10,6 @@ class Donate extends React.Component {
       redirect: null, 
       firstname: '', 
       surname: '', 
-      country: '', 
       amount: ''
     };
     this.handleChange = this.handleChange.bind(this);
@@ -29,11 +28,11 @@ class Donate extends React.Component {
 
 
   async handleSubmit(event) {
-    if (!this.state.firstname || !this.state.surname || !this.state.country || !this.state.amount ){
+    if (!this.state.firstname || !this.state.surname || !this.state.amount ){
       alert ('Please complete all required fields'); 
     }
     else {
-    makeDonation(this.state.firstname, this.state.surname, this.state.country, this.state.amount) 
+    makeDonation(this.state.firstname, this.state.surname, this.state.amount) 
     this.setState({ redirect: "/donated" });
     }
      event.preventDefault(); 
@@ -53,8 +52,6 @@ class Donate extends React.Component {
               <label for='surname'>Surname:</label>
               <input type='text' id='surname' name='surname' onChange={this.handleChange} ></input>
               <br></br>
-              <label for='country'>Country:</label>
-              <input type='text' id='country' name='country' onChange={this.handleChange} ></input>
               <br></br>
               <label for='amount'>Donation Amount:</label>
               <input type='number' id='amount' name='amount' onChange={this.handleChange} ></input>

@@ -55,8 +55,8 @@ const findExhibition = async (req, res) => {
 let donationIdCounter = 1; 
 
 const makeDonation = async (req, res) => {
-    const {firstname, surname, country, amount} = req.body; 
-    const query = 'INSERT INTO donations (id, firstname, surname, country, amount, time) VALUES ($1, $2, $3, $4, $5, $6)'; 
+    const {firstname, surname, amount} = req.body; 
+    const query = 'INSERT INTO donations (id, firstname, surname, amount, time) VALUES ($1, $2, $3, $4, $5)'; 
 
   try{
     let id = donationIdCounter++;  
@@ -67,7 +67,7 @@ const makeDonation = async (req, res) => {
     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
     var datetime = date+' '+time;
     
-    const newDonation = await pool.query(query, [id, firstname, surname, country, amount, datetime]);  
+    const newDonation = await pool.query(query, [id, firstname, surname, amount, datetime]);  
     res.status(201).send({
 			status: 'Success',
 			message: 'New donation made',

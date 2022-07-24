@@ -6,11 +6,11 @@ axios.defaults.headers.common = {
 
 var baseUrl; 
 
-export const makeDonation = async (firstname, surname, country, amount) => {
+export const makeDonation = async (firstname, surname, amount) => {
 
 var baseUrl = 'api/donate'; 
 
-  const request = axios.post(baseUrl, {firstname, surname, country, amount})
+  const request = axios.post(baseUrl, {firstname, surname, amount})
   
   return request.then(response => {
     console.log('this got sent back from the backend', response)
