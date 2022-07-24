@@ -14,7 +14,7 @@ app.use(helmet.noSniff());
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
-      "script-src": ["'self'", "wellsbury-museum.herokuapp.com"],
+      "script-src": ["unsafe-inline"],
       "style-src": null,
     },
   })
