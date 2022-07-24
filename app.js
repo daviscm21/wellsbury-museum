@@ -11,14 +11,7 @@ const PORT = process.env.PORT || 5000; // use either the host env var port (PORT
 
 app.use(helmet.frameguard({ action: 'SAMEORIGIN' }));
 app.use(helmet.noSniff());
-app.use(
-  helmet.contentSecurityPolicy({
-    directives: {
-      "script-src": ["unsafe-inline"],
-      "style-src": null,
-    },
-  })
-);
+app.use(helmet.contentSecurityPolicy());
 app.use(cors()); // Enable CORS 
 app.use(express.json()); // Recognize Request Objects as JSON objects
 app.use(express.static('client/build')); // serve static files (css & js) from the 'public' directory
