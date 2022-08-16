@@ -12,12 +12,14 @@ const PORT = process.env.PORT || 5000; // use either the host env var port (PORT
 
 app.use(helmet.frameguard({ action: 'SAMEORIGIN' }));
 app.use(helmet.noSniff());
+app.use(helmet.hsts());
 app.use(expressCspHeader({
   directives: {
       'default-src': [SELF],
       'script-src': [SELF, INLINE, 'somehost.com'],
-      'style-src': [SELF, 'mystyles.net'],
-      'img-src': ['data:', 'images.com'],
+      'style-src': [SELF, 'fonts.googleapis.com'],
+      'font-src': ['fonts.gstatic.com'], 
+      'img-src': ['data:', 'cdn.pixabay.com', 'culture.ec.europa.eu', 'upload.wikimedia.org', 'https://media.nga.gov'],
       'worker-src': [NONE],
       'block-all-mixed-content': true
   }
